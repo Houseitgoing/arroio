@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Quem somos?</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+        }
+
+        #intro {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #2e7d32;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 1s ease;
+        }
+
+        #intro img {
+            max-width: 220px;
+            opacity: 0;
+            animation: fadeIn 0.8s ease-in forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        #imagemFundo {
+            width: 100%;
+            display: block;
+        }
+
+        #mensagem {
+            opacity: 0;
+            transition: opacity 1.2s ease;
+            text-align: center;
+            padding: 80px 20px 40px;
+            color: #2e7d32;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        #mensagem.show {
+            opacity: 1;
+        }
+
+        h1 {
+            font-size: 2.8em;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.25em;
+            line-height: 1.6;
+        }
+
+        .decor-line {
+            width: 80px;
+            height: 4px;
+            background-color: #2e7d32;
+            margin: 30px auto;
+            border-radius: 2px;
+        }
+
+        .descricao {
+            background-color: #ffffffcc;
+            margin: 40px auto;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            max-width: 900px;
+        }
+
+        .descricao p {
+            color: #444;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 10px;
+            padding: 60px 20px;
+            opacity: 0;
+            transition: opacity 1.5s ease;
+        }
+
+        .gallery img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .gallery img.show {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .descricao {
+                padding: 20px;
+            }
+
+            .gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+            .footer-logo img {
+      width: 120px;
+      height: auto;
+      filter: brightness(0) invert(1);
+    }
+
+    .footer-redes {
+      flex: 1;
+      min-width: 300px;
+      margin: 10px;
+      text-align: right;
+    }
+
+    .footer-redes h3 {
+      margin-bottom: 10px;
+      font-size: 18px;
+    }
+
+    .footer-redes a {
+      margin-left: 10px;
+    }
+
+    .footer-redes img {
+      width: 30px;
+      filter: brightness(0) invert(1);
+      transition: transform 0.3s ease;
+    }
+
+    .footer-redes img:hover {
+      transform: scale(1.1);
+    }
+
+     footer.footer-verde {
+      background-color: #0d5b0f;
+      color: white;
+      padding: 40px 0;
+      width: 100%;
+    }
+
+      .footer-logo,
+      .footer-redes {
+        text-align: center;
+      }
+
+      .footer-redes a {
+        margin: 0 8px;
+      }
+    </style>
+</head>
+<body>
+
+<!-- Tela de introdução com logotipo -->
+<div id="intro">
+    <img src="lesmaslogotipo.png" alt="Coletivo Lesmas">
+</div>
+
+<!-- Imagem grande de fundo como parte do conteúdo -->
+<img id="imagemFundo" src="novotemmplae site.jpg" alt="Imagem de fundo do site">
+
+
+<script>
+    window.onload = function () {
+        const intro = document.getElementById("intro");
+        const mensagem = document.getElementById("mensagem");
+        const gallery = document.getElementById("gallery");
+        const images = gallery?.querySelectorAll("img");
+
+        setTimeout(() => {
+            intro.style.opacity = 0;
+            setTimeout(() => {
+                intro.style.display = "none";
+
+                mensagem.classList.add("show");
+                gallery.style.opacity = 1;
+
+                images.forEach((img, index) => {
+                    setTimeout(() => {
+                        img.classList.add("show");
+                    }, index * 100);
+                });
+            }, 1000);
+        }, 1500);
+    };
+
+</script>
+  <footer class="footer-verde">
+     <div class="container">
+       <div class="footer-logo">
+         <a href="https://www.antonioarroio.edu.pt" target="_blank">
+           <img src="PrincipalPreto.png" alt="Escola Artística António Arroio">
+         </a>
+       </div>
+       <div class="footer-redes">
+         <h3>Segue-nos!</h3>
+         <a href="https://www.tiktok.com/@lesmas_aa" target="_blank"><img src="2logotipotiktok.png" alt="Tiktok"></a>
+         <a href="https://www.instagram.com/lesmas_aa/" target="_blank"><img src="logotipoinstagram.png" alt="Instagram"></a>
+       </div>
+     </div>
+   </footer>
+  
+</body>
+</body>
+</html>
