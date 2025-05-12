@@ -44,27 +44,12 @@
       border-radius: 10px;
       border: 3px solid rgba(36, 243, 0, 0.388);
       overflow: hidden;
-      transform-origin: top left;
     }
 
     .video-overlay video {
       width: 100%;
       height: 100%;
       display: block;
-    }
-
-    #video1-overlay {
-      width: 519.4px;
-      height: 420.82px;
-      left: 915.8px;
-      top: 1406.56px;
-    }
-
-    #video2-overlay {
-      width: 1009.78px;
-      height: 694.1px;
-      left: 267.9px;
-      top: 2545.72px;
     }
 
     footer.footer-verde {
@@ -202,10 +187,21 @@
     }
 
     function adjustVideoPositions() {
-      const scale = mainImage.clientWidth / mainImage.naturalWidth;
-      document.querySelectorAll('.video-overlay').forEach(overlay => {
-        overlay.style.transform = `scale(${scale})`;
-      });
+      const scaleX = mainImage.clientWidth / mainImage.naturalWidth;
+      const scaleY = mainImage.clientHeight / mainImage.naturalHeight;
+
+      const video1 = document.getElementById('video1-overlay');
+      const video2 = document.getElementById('video2-overlay');
+
+      video1.style.left = `${915.8 * scaleX}px`;
+      video1.style.top = `${1406.56 * scaleY}px`;
+      video1.style.width = `${519.4 * scaleX}px`;
+      video1.style.height = `${420.82 * scaleY}px`;
+
+      video2.style.left = `${267.9 * scaleX}px`;
+      video2.style.top = `${2545.72 * scaleY}px`;
+      video2.style.width = `${1009.78 * scaleX}px`;
+      video2.style.height = `${694.1 * scaleY}px`;
     }
 
     function scaleCoords(coords, scaleX, scaleY) {
@@ -256,8 +252,6 @@
       resizeImageMap();
       setTimeout(() => {
         checkScroll();
-        showVideo('video1-overlay');
-        showVideo('video2-overlay');
       }, 500);
     };
 
