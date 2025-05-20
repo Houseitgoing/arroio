@@ -1,51 +1,115 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PODCAST!</title>
+    <title>Página Ga</title>
     <style>
         body {
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
-            position: relative;
-            min-height: 100vh;
+            background-color: #f8f5e0;
             display: flex;
             flex-direction: column;
+            min-height: 100vh;
         }
         
-        .main-container {
-            flex: 1;
-            position: relative;
-            width: 100%;
-        }
-        
-        .podcast-image {
+        .header-image {
             width: 100%;
             display: block;
         }
         
-        .podcast-image img {
+        .content-area {
+            padding: 40px 20px;
+            flex: 1;
+        }
+        
+        .boxes-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .box {
             width: 100%;
-            height: auto;
+            min-height: 100px;
+            display: flex;
+            flex-direction: column;
+            padding: 20px 25px;
+            box-sizing: border-box;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
         
-        .video-container {
-            position: absolute;
-            left: 188px;
-            top: 486px;
-            width: calc(1360px - 188px);
-            height: calc(1262px - 486px);
-            overflow: hidden;
+        .box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
         }
         
-        .video-container video {
+        .box-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             width: 100%;
-            height: 100%;
-            object-fit: cover;
         }
         
+        .spotify-icon {
+            width: 30px;
+            height: 30px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ffffff"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+        
+        .box-title {
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        .box-description {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 14px;
+            margin-top: 8px;
+            line-height: 1.4;
+        }
+        
+        /* Gradiente de cores das caixas */
+        .box:nth-child(1) { background-color: #81a88b; }
+        .box:nth-child(2) { background-color: #79a084; }
+        .box:nth-child(3) { background-color: #71987d; }
+        .box:nth-child(4) { background-color: #699076; }
+        .box:nth-child(5) { background-color: #61886f; }
+        .box:nth-child(6) { background-color: #598068; }
+        .box:nth-child(7) { background-color: #517861; }
+
+        /* Imagem no final - agora ocupando toda a largura */
+        .full-width-image {
+            width: 100vw;
+            display: block;
+            margin: 40px 0 0;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Footer styles */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+        }
+
         .footer-logo img {
             width: 120px;
             height: auto;
@@ -83,7 +147,7 @@
             color: white;
             padding: 40px 0;
             width: 100%;
-            margin-top: auto; /* Isso faz o footer ficar no final */
+            margin-top: auto;
         }
 
         .footer-logo,
@@ -94,35 +158,63 @@
         .footer-redes a {
             margin: 0 8px;
         }
-        
-        /* Container para o conteúdo principal */
-        .content-wrapper {
-            position: relative;
-            width: 100%;
-        }
     </style>
 </head>
-
 <body>
-    <div class="main-container">
-        <div class="content-wrapper">
-            <!-- Imagem de fundo com mapa -->
-            <img src="ga paagina podcast dia 1.png" alt="Página do Podcast Dia 1" usemap="#image-map" class="podcast-image">
+    <img src="Paginaga1.png" alt="Cabeçalho" class="header-image">
+    
+    <div class="content-area">
+        <div class="boxes-container">
+            <!-- Caixa 1 -->
+            <div class="box" onclick="window.open('https://open.spotify.com/episode/5fDNLRuoiZVWKnKRgvNQW7?si=f5b858e043bc4122', '_blank')">
+                <div class="box-header">
+                    <span class="box-title">Ep.1 - Nina e Gaspar</span>
+                    <div class="spotify-icon"></div>
+                </div>
+                <p class="box-description">O primeiro episódio do nosso PODCAST, com os nossos anfitriões NINA e GASPAR.<br>"Isto foi só um cheirinho do que está por vir..."</p>
+            </div>
             
-            <map name="image-map">
-                <area target="" alt="" title="" href="" coords="188,486,1360,1262" shape="rect">
-            </map>
+            <!-- Caixa 2 -->
+            <div class="box" onclick="window.open('https://open.spotify.com/episode/5KsZwLo89gcWPVoPOxAVod', '_blank')">
+                <div class="box-header">
+                    <span class="box-title">Ep.2 - Ricardo</span>
+                    <div class="spotify-icon"></div>
+                </div>
+                <p class="box-description">Mais um episódio, agora com o Ricardo!!! Infelizmente não entrou no curso que queria como alguns alunos e contou nos como tem sido desde aí. 🐌🐌🐌</p>
+            </div>
             
-            <!-- Container do vídeo posicionado sobre as coordenadas especificadas -->
-            <div class="video-container">
-                <video controls>
-                    <source src="podcast1.mp4" type="video/mp4">
-                    Seu navegador não suporta o elemento de vídeo.
-                </video>
+            <!-- Caixa 3 -->
+            <div class="box" onclick="window.open('https://open.spotify.com/episode/75ms9JciVtnHpgRG1HoIul', '_blank')">
+                <div class="box-header">
+                    <span class="box-title">Ep.3 - Professora Maria João</span>
+                    <div class="spotify-icon"></div>
+                </div>
+                <p class="box-description">Que mais poderias esperar?! Ninguém estava à espera, mas aconteceu, uma das figuras mais emblemáticas da Arroio: a professora de Português, MARIA JOÃO.</p>
+            </div>
+            
+            <!-- Caixas restantes -->
+            <div class="box">
+                <span class="box-title">Ep.4</span>
+            </div>
+            
+            <div class="box">
+                <span class="box-title">Ep.5</span>
+            </div>
+            
+            <div class="box">
+                <span class="box-title">Ep.6</span>
+            </div>
+            
+            <div class="box">
+                <span class="box-title">Ep.7</span>
             </div>
         </div>
+
+        <!-- Imagem em largura total -->
+        <img src="Paginapodcast2.png" alt="Rodapé do Podcast" class="full-width-image">
     </div>
-    
+
+    <!-- Rodapé verde -->
     <footer class="footer-verde">
         <div class="container">
             <div class="footer-logo">
