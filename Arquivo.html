@@ -3,37 +3,348 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mobília Indisponível</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+    <title>Arquivo</title>
     <style>
+        :root {
+            --dark-green: #1a3a1a;
+            --medium-green: #2d5a2d;
+            --light-green: #4c8c4c;
+            --lighter-green: #7ab97a;
+            --lightest-green: #b8e0b8;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
         body {
-            font-family: 'Space Grotesk', sans-serif;
+            background-color: var(--lightest-green);
+            color: #333;
+            line-height: 1.6;
             display: flex;
             flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        header {
+            background: linear-gradient(to right, var(--dark-green), var(--medium-green));
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .header-description {
+            font-style: italic;
+            margin-bottom: 0.5rem;
+        }
+        
+        .header-subtitle {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            flex: 1;
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+        
+        .gallery-item {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            aspect-ratio: 1/1; /* Mantém proporção quadrada */
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .gallery-item img, .gallery-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f5f5f5;
-            text-align: center;
         }
-        .message {
-            font-size: 2rem;
-            margin-bottom: 2rem;
+        
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
         }
-        .back-button {
+        
+        .lightbox-content img, .lightbox-content video {
+            max-width: 100%;
+            max-height: 90vh;
+            display: block;
+            margin: 0 auto;
+        }
+        
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
             font-weight: bold;
-            color: #0066cc;
-            text-decoration: none;
-            font-size: 1.2rem;
+            cursor: pointer;
         }
-        .back-button:hover {
-            text-decoration: underline;
+
+        /* Footer Styles */
+        footer.footer-verde {
+            background-color: #0d5b0f;
+            color: white;
+            padding: 40px 0;
+            width: 100%;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .footer-logo img {
+            width: 120px;
+            height: auto;
+            filter: brightness(0) invert(1);
+        }
+
+        .footer-redes {
+            flex: 1;
+            min-width: 300px;
+            margin: 10px;
+            text-align: right;
+        }
+
+        .footer-redes h3 {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .footer-redes a {
+            margin-left: 10px;
+        }
+
+        .footer-redes img {
+            width: 30px;
+            filter: brightness(0) invert(1);
+            transition: transform 0.3s ease;
+        }
+
+        .footer-redes img:hover {
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .gallery {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 0.8rem;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .footer-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-logo,
+            .footer-redes {
+                text-align: center;
+                margin: 10px 0;
+            }
+
+            .footer-redes {
+                text-align: center;
+            }
+
+            .footer-redes a {
+                margin: 0 8px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .gallery {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 0.5rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="message">Esta mobília ainda não se encontra disponível</div>
-    <a href="index.html" class="back-button">Volta ao menu principal</a>
+    <header>
+        <h1>Arquivo</h1>
+        <p class="header-description">Aqui tens uma seleção das nossas fotos/vídeos do "backstage" do nosso projeto!</p>
+        <p class="header-subtitle">Coletivo Lesmas, mãos à obra!!!!</p>
+    </header>
+    
+    <div class="container">
+        <div class="gallery" id="gallery-container">
+            <!-- Itens serão inseridos aleatoriamente via JavaScript -->
+        </div>
+    </div>
+    
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox">
+        <span class="close">&times;</span>
+        <div class="lightbox-content" id="lightbox-content"></div>
+    </div>
+    
+    <footer class="footer-verde">
+        <div class="footer-container">
+            <div class="footer-logo">
+                <a href="https://www.antonioarroio.edu.pt" target="_blank">
+                    <img src="PrincipalPreto.png" alt="Escola Artística António Arroio">
+                </a>
+            </div>
+            <div class="footer-redes">
+                <h3>Segue-nos!</h3>
+                <a href="https://www.tiktok.com/@lesmas_aa" target="_blank"><img src="2logotipotiktok.png" alt="Tiktok"></a>
+                <a href="https://www.instagram.com/lesmas_aa/" target="_blank"><img src="logotipoinstagram.png" alt="Instagram"></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Array com todos os itens da galeria (imagens e vídeos) - sem .HEIC
+        const mediaItems = [
+            { type: 'image', src: '3f3055ba-b01c-4499-b78e-1af0ea33342b.jpeg' },
+            { type: 'image', src: '63e9750b-2524-47fa-a030-aedaea4fc29c.jpeg' },
+            { type: 'image', src: '271c7f9-70a7-4108-9463-8ea79bbfefc6.jpeg' },
+            { type: 'image', src: 'IMG_1536.jpeg' },
+            { type: 'image', src: 'IMG_1584.jpeg' },
+            { type: 'image', src: 'IMG_1588.jpeg' },
+            { type: 'video', src: 'IMG_1595.mov' },
+            { type: 'image', src: 'IMG_2079.jpg' },
+            { type: 'image', src: 'IMG_2080.jpg' },
+            { type: 'image', src: 'IMG_2081.jpg' },
+            { type: 'image', src: 'IMG_2083.jpg' },
+            { type: 'image', src: 'IMG_2084.jpg' },
+            { type: 'image', src: 'IMG_2085.jpg' },
+            { type: 'image', src: 'IMG_2086.jpg' },
+            { type: 'image', src: 'PHOTO-2025-04-26-13-14-19.JPG' },
+            { type: 'image', src: 'PHOTO-2025-05-04-16-41-26.jpg' },
+            { type: 'image', src: 'PHOTO-2025-05-12-09-19-00.jpg' },
+            { type: 'image', src: 'PHOTO-2025-05-20-10-44-20(1).jpg' },
+            { type: 'image', src: 'PHOTO-2025-05-20-10-44-20.jpg' },
+            { type: 'video', src: 'VIDEO-2025-05-05-09-02-10.mp4' },
+            { type: 'video', src: 'VIDEO-2025-05-05-09-02-12.mp4' },
+            { type: 'video', src: 'VIDEO-2025-05-05-09-02-14.mp4' },
+            { type: 'video', src: 'VIDEO-2025-05-05-09-02-18.mp4' },
+            { type: 'video', src: 'VIDEO-2025-05-05-09-02-21.mp4' },
+            { type: 'video', src: 'VIDEO-2025-05-15-21-04-57.mov' },
+            { type: 'video', src: 'VIDEO-2025-05-16-07-19-48.mp4' },
+            { type: 'video', src: 'VIDEO-2025-05-19-16-46-05.mp4' },
+            { type: 'video', src: 'VIDEO-2025-05-20-10-44-16.mp4' },
+            { type: 'video', src: 'VIDEO-2025-05-20-10-44-20.mp4' }
+        ];
+
+        // Função para embaralhar o array
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        // Embaralhar os itens
+        const shuffledItems = shuffleArray([...mediaItems]);
+
+        // Adicionar itens à galeria
+        const galleryContainer = document.getElementById('gallery-container');
+        
+        shuffledItems.forEach(item => {
+            const galleryItem = document.createElement('div');
+            galleryItem.className = 'gallery-item';
+            
+            if (item.type === 'image') {
+                galleryItem.innerHTML = `<img src="${item.src}" alt="${item.src}">`;
+            } else {
+                galleryItem.innerHTML = `<video autoplay loop muted playsinline><source src="${item.src}" type="video/mp4"></video>`;
+            }
+            
+            galleryItem.addEventListener('click', () => openLightbox(item));
+            galleryContainer.appendChild(galleryItem);
+        });
+
+        // Lightbox functions
+        const lightbox = document.getElementById('lightbox');
+        const lightboxContent = document.getElementById('lightbox-content');
+        const closeBtn = document.querySelector('.close');
+
+        function openLightbox(item) {
+            lightboxContent.innerHTML = '';
+            
+            if (item.type === 'image') {
+                const img = document.createElement('img');
+                img.src = item.src;
+                lightboxContent.appendChild(img);
+            } else {
+                const video = document.createElement('video');
+                video.controls = true;
+                video.autoplay = true;
+                const source = document.createElement('source');
+                source.src = item.src;
+                source.type = 'video/mp4';
+                video.appendChild(source);
+                lightboxContent.appendChild(video);
+            }
+            
+            lightbox.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        closeBtn.addEventListener('click', () => {
+            lightbox.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                lightbox.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+    </script>
 </body>
 </html>
