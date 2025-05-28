@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página Ga</title>
+    <title>Podcast!</title>
     <style>
         body {
             margin: 0;
@@ -23,6 +23,8 @@
         .content-area {
             padding: 40px 20px;
             flex: 1;
+            display: flex;
+            justify-content: center;
         }
         
         .boxes-container {
@@ -30,7 +32,7 @@
             flex-direction: column;
             gap: 20px;
             max-width: 600px;
-            margin: 0 auto;
+            width: 100%;
         }
         
         .box {
@@ -58,12 +60,30 @@
             width: 100%;
         }
         
-        .spotify-icon {
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-icon {
             width: 30px;
             height: 30px;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ffffff"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>');
             background-size: contain;
             background-repeat: no-repeat;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .social-icon:hover {
+            transform: scale(1.1);
+        }
+        
+        .spotify-icon {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ffffff"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>');
+        }
+        
+        .instagram-icon {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23ffffff"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>');
         }
         
         .box-title {
@@ -80,14 +100,10 @@
             line-height: 1.4;
         }
         
-        /* Gradiente de cores das caixas */
+        /* Gradiente de cores das caixas - cada uma mais escura que a anterior */
         .box:nth-child(1) { background-color: #81a88b; }
-        .box:nth-child(2) { background-color: #79a084; }
-        .box:nth-child(3) { background-color: #71987d; }
-        .box:nth-child(4) { background-color: #699076; }
-        .box:nth-child(5) { background-color: #61886f; }
-        .box:nth-child(6) { background-color: #598068; }
-        .box:nth-child(7) { background-color: #517861; }
+        .box:nth-child(2) { background-color: #6a9275; }
+        .box:nth-child(3) { background-color: #537c5f; }
 
         /* Imagem no final - agora ocupando toda a largura */
         .full-width-image {
@@ -100,27 +116,25 @@
         }
 
         /* Footer styles */
-        .container {
+        .footer-container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
             display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
+            flex-direction: column;
             align-items: center;
+            text-align: center;
         }
 
         .footer-logo img {
             width: 120px;
             height: auto;
             filter: brightness(0) invert(1);
+            margin-bottom: 20px;
         }
 
         .footer-redes {
-            flex: 1;
-            min-width: 300px;
-            margin: 10px;
-            text-align: right;
+            margin-bottom: 20px;
         }
 
         .footer-redes h3 {
@@ -129,7 +143,7 @@
         }
 
         .footer-redes a {
-            margin-left: 10px;
+            margin: 0 10px;
         }
 
         .footer-redes img {
@@ -149,15 +163,6 @@
             width: 100%;
             margin-top: auto;
         }
-
-        .footer-logo,
-        .footer-redes {
-            text-align: center;
-        }
-
-        .footer-redes a {
-            margin: 0 8px;
-        }
     </style>
 </head>
 <body>
@@ -166,57 +171,49 @@
     <div class="content-area">
         <div class="boxes-container">
             <!-- Caixa 1 -->
-            <div class="box" onclick="window.open('https://open.spotify.com/episode/5fDNLRuoiZVWKnKRgvNQW7?si=f5b858e043bc4122', '_blank')">
+            <div class="box">
                 <div class="box-header">
                     <span class="box-title">Ep.1 - Nina e Gaspar</span>
-                    <div class="spotify-icon"></div>
+                    <div class="social-icons">
+                        <div class="social-icon spotify-icon" onclick="window.open('https://open.spotify.com/episode/5fDNLRuoiZVWKnKRgvNQW7?si=f5b858e043bc4122', '_blank')"></div>
+                        <div class="social-icon instagram-icon" onclick="window.open('https://www.instagram.com/reel/DJV5DosIXT6/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==', '_blank')"></div>
+                    </div>
                 </div>
                 <p class="box-description">O primeiro episódio do nosso PODCAST, com os nossos anfitriões NINA e GASPAR.<br>"Isto foi só um cheirinho do que está por vir..."</p>
             </div>
             
             <!-- Caixa 2 -->
-            <div class="box" onclick="window.open('https://open.spotify.com/episode/5KsZwLo89gcWPVoPOxAVod', '_blank')">
+            <div class="box">
                 <div class="box-header">
                     <span class="box-title">Ep.2 - Ricardo</span>
-                    <div class="spotify-icon"></div>
+                    <div class="social-icons">
+                        <div class="social-icon spotify-icon" onclick="window.open('https://open.spotify.com/episode/5KsZwLo89gcWPVoPOxAVod', '_blank')"></div>
+                        <div class="social-icon instagram-icon" onclick="window.open('https://www.instagram.com/reel/DJr0BtKILhq/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==', '_blank')"></div>
+                    </div>
                 </div>
                 <p class="box-description">Mais um episódio, agora com o Ricardo!!! Infelizmente não entrou no curso que queria como alguns alunos e contou nos como tem sido desde aí. 🐌🐌🐌</p>
             </div>
             
             <!-- Caixa 3 -->
-            <div class="box" onclick="window.open('https://open.spotify.com/episode/75ms9JciVtnHpgRG1HoIul', '_blank')">
+            <div class="box">
                 <div class="box-header">
                     <span class="box-title">Ep.3 - Professora Maria João</span>
-                    <div class="spotify-icon"></div>
+                    <div class="social-icons">
+                        <div class="social-icon spotify-icon" onclick="window.open('https://open.spotify.com/episode/75ms9JciVtnHpgRG1HoIul', '_blank')"></div>
+                        <div class="social-icon instagram-icon" onclick="window.open('https://www.instagram.com/reel/DJtFZVBIodR/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==', '_blank')"></div>
+                    </div>
                 </div>
                 <p class="box-description">Que mais poderias esperar?! Ninguém estava à espera, mas aconteceu, uma das figuras mais emblemáticas da Arroio: a professora de Português, MARIA JOÃO.</p>
             </div>
-            
-            <!-- Caixas restantes -->
-            <div class="box">
-                <span class="box-title">Ep.4</span>
-            </div>
-            
-            <div class="box">
-                <span class="box-title">Ep.5</span>
-            </div>
-            
-            <div class="box">
-                <span class="box-title">Ep.6</span>
-            </div>
-            
-            <div class="box">
-                <span class="box-title">Ep.7</span>
-            </div>
         </div>
-
-        <!-- Imagem em largura total -->
-        <img src="Paginapodcast2.png" alt="Rodapé do Podcast" class="full-width-image">
     </div>
+
+    <!-- Imagem em largura total -->
+    <img src="Paginapodcast2.png" alt="Rodapé do Podcast" class="full-width-image">
 
     <!-- Rodapé verde -->
     <footer class="footer-verde">
-        <div class="container">
+        <div class="footer-container">
             <div class="footer-logo">
                 <a href="https://www.antonioarroio.edu.pt" target="_blank">
                     <img src="PrincipalPreto.png" alt="Escola Artística António Arroio">
